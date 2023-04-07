@@ -27,7 +27,7 @@ class OneToHundredStream extends Readable {
   }
 }
 
-class InverseNumber extends Transform {
+class InverseNumberStrem extends Transform {
   _transform(chunk, encoding, callback) {
     const transformed = Number(chunk.toString()) * -1;
 
@@ -43,5 +43,5 @@ class MultiplybyTemStrem extends Writable {
 }
 
 new OneToHundredStream()
-  .pipe(new InverseNumber())
+  .pipe(new InverseNumberStrem())
   .pipe(new MultiplybyTemStrem());
