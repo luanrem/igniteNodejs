@@ -2,6 +2,7 @@
 // ESModules ==> import
 // internal module from node you need to import like "node:<package>"
 import http from "node:http";
+import { json } from "./middlewares/json.js";
 
 // JSON - Javascript Object Notation
 // Cabeçalhos (Requisição;resposta) => Metadados
@@ -11,24 +12,13 @@ const users = [];
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;
 
-  const buffers = [];
-
-  for await (const chunk of req) {
-    buffers.push(chunk);
-  }
-
-  try {
-    req.body = JSON.parse(Buffer.concat(buffers).toString());
-  } catch {
-    req.body = null;
-  }
+  // middlewares sempre passam como parametro req e res
+  await json(req, res);
 
   console.log(req.body);
 
   if (method === "GET" && url === "/users") {
-    return res
-      .setHeader("Content-type", "application/json")
-      .end(`Listagem de usuarios: ${JSON.stringify(users)}`);
+    return res.end(`Listagem de usuarios: ${JSON.stringify(users)}`);
   }
 
   if (method === "POST" && url === "/users") {
