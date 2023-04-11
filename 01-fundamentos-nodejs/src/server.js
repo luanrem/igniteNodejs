@@ -5,8 +5,13 @@ import http from "node:http";
 import { json } from "./middlewares/json.js";
 import { routes } from "./routes.js";
 
-// JSON - Javascript Object Notation
-// Cabeçalhos (Requisição;resposta) => Metadados
+// Query Parameters: URL Stateful => Filtros, paginacao, nao obrigatorios
+// http://localhost:3333/users?userId=1&name=Luan
+
+// Route Parameters: Identificação de recurso
+// http://localhost:3333/users/1
+
+// Request Body: Envio de informações de formulários (HTTPs)
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;
