@@ -27,20 +27,14 @@ export class InMemoryUsersRepository implements UsersRepository {
 
     return user
   }
+
+  async findById(id: string): Promise<User | null> {
+    const user = this.items.find((item) => item.id === id)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
 }
-
-// const registerUseCase = new RegisterUseCase({
-//   async findByEmail(email) {
-//     return null
-//   },
-
-//   async create(data) {
-//     return {
-//       id: 'user-1',
-//       name: data.name,
-//       email: data.email,
-//       password_hash: data.password_hash,
-//       created_at: new Date(),
-//     }
-//   },
-// })
