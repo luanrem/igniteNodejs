@@ -40,8 +40,6 @@ describe('Check-in Use Case', () => {
       userLongitude: 0,
     })
 
-    console.log(checkIn.created_at)
-
     expect(checkIn.id).toEqual(expect.any(String))
   })
 
@@ -91,5 +89,27 @@ describe('Check-in Use Case', () => {
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
+  })
+
+  it('should not be able to check in on distant gym', async () => {
+    vi.setSystemTime(new Date(2022, 0, 20, 8, 0, 0))
+
+    gymsRepository.items.push({
+      id: 'gym-01',
+      title: 'JavaScript Gym',
+      description: '',
+      phone: '',
+      latitude: new Decimal(-25.438604),
+      longitude: new Decimal(-49.31237),
+    })
+
+    await expect(() =>
+      sut.execute({
+        gymId: 'gym-01',
+        userId: 'user-01',
+        userLatitude: -25.4568208,
+        userLongitude: -49.2989875,
+      }),
+    ).rejects.toBeInstanceOf(Error)
   })
 })
