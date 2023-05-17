@@ -44,3 +44,5 @@ app.setErrorHandler((error, _request, reply) => {
 
   return reply.status(500).send({ message: 'Internal server error.' })
 })
+
+// Pull Request to test E2E github actions
