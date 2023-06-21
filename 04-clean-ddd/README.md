@@ -3,6 +3,7 @@
 Design dirigido à domínio
 
 ## domínio
+
 - Domain Experts
   - Conversa
 - Linguagem ubíqua
@@ -19,3 +20,4 @@ Design dirigido à domínio
 - Subdomínios (Bounded Contexts)
 - Entidades
 - Caso de uso
+  
